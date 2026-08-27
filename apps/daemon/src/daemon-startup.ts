@@ -57,11 +57,11 @@ export function parseDaemonCliStartupArgs(
       const next = requiredOptionValue(a, argv[++i], 'a port');
       if (typeof next !== 'string') return next;
       const parsedPort = Number(next);
-      if (!Number.isInteger(parsedPort) || parsedPort <= 0 || parsedPort > 65535) {
+      if (!Number.isInteger(parsedPort) || parsedPort < 0 || parsedPort > 65535) {
         return { ok: false, kind: 'error', message: `invalid port: ${next}` };
       }
       port = parsedPort;
-    } else if (a === '--host') {
+    } else if (a === '--host' || a === '--hostname') {
       const next = requiredOptionValue(a, argv[++i], 'an address');
       if (typeof next !== 'string') return next;
       host = normalizeDaemonBindHost(next);
@@ -71,6 +71,8 @@ export function parseDaemonCliStartupArgs(
       return { ok: false, kind: 'help' };
     } else if (a.startsWith('-')) {
       return { ok: false, kind: 'error', message: `unknown option: ${a}` };
+    } else if (a === 'serve') {
+      continue;
     } else {
       return { ok: false, kind: 'error', message: `unknown command: od ${a}` };
     }

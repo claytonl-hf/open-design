@@ -8,7 +8,14 @@
 // single function is easier to audit and harder to forget when a new
 // sensitive surface ships.
 
-import type { CaptureResult } from 'posthog-js';
+// Forge Design fork: posthog-js is not installed. CaptureResult is defined
+// locally so scrubBeforeSend keeps its signature for callers/tests.
+
+export interface CaptureResult {
+  event: string;
+  properties: Record<string, unknown>;
+  [key: string]: unknown;
+}
 
 // Tags whose text content can carry user-typed values. PostHog autocapture
 // does not capture input/textarea `value` properties by default, but it

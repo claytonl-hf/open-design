@@ -222,7 +222,7 @@ const AGENT_CLI_ENV_KEYS: ReadonlyMap<string, ReadonlySet<string>> = new Map([
   ['kimi', new Set(['KIMI_BIN'])],
   ['kiro', new Set(['KIRO_BIN'])],
   ['kilo', new Set(['KILO_BIN'])],
-  ['opencode', new Set(['OPENCODE_BIN'])],
+  ['opencode', new Set(['OPENCODE_BIN', 'OPENROUTER_API_KEY', 'OPENROUTER_BASE_URL', 'FORGE_OPENCODE_BASE_URL'])],
   ['pi', new Set(['PI_BIN'])],
   ['qoder', new Set(['QODER_BIN'])],
   ['qwen', new Set(['QWEN_BIN'])],

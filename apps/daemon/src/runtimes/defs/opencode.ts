@@ -181,4 +181,18 @@ export const opencodeAgentDef = {
     // invocation without polluting the user's saved config files. See
     // <https://opencode.ai/docs/config> and issue #2142.
     externalMcpInjection: 'opencode-env-content',
+    // Forge sidecar: pass through OpenRouter provider config and the
+    // Forge-specific OpenCode base URL so the spawned opencode process
+    // can reach the same provider as the host Forge app.
+    env: {
+      ...(process.env.OPENROUTER_API_KEY
+        ? { OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY }
+        : {}),
+      ...(process.env.OPENROUTER_BASE_URL
+        ? { OPENROUTER_BASE_URL: process.env.OPENROUTER_BASE_URL }
+        : {}),
+      ...(process.env.FORGE_OPENCODE_BASE_URL
+        ? { FORGE_OPENCODE_BASE_URL: process.env.FORGE_OPENCODE_BASE_URL }
+        : {}),
+    },
 } satisfies RuntimeAgentDef;
